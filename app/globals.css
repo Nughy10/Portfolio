@@ -1,26 +1,273 @@
 @import "tailwindcss";
 
+/* ============================================
+   THEME VARIABLES
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Dark theme (default) */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a2e;
+  --bg-card-hover: #22223a;
+  --bg-terminal: #0d1117;
+  --bg-code: #161b22;
+
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-glow: rgba(99, 102, 241, 0.3);
+  --accent-subtle: rgba(99, 102, 241, 0.1);
+
+  --green: #22c55e;
+  --green-dim: #16a34a;
+  --cyan: #06b6d4;
+  --amber: #f59e0b;
+  --rose: #f43f5e;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+
+  --terminal-green: #4ade80;
+  --terminal-prompt: #6366f1;
+  --terminal-cursor: #6366f1;
+
+  --nav-bg: rgba(10, 10, 15, 0.8);
+  --nav-border: rgba(255, 255, 255, 0.06);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px var(--accent-glow);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+[data-theme='light'] {
+  --bg-primary: #fafafa;
+  --bg-secondary: #f4f4f5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f9f9fb;
+  --bg-terminal: #1e1e2e;
+  --bg-code: #282a36;
+
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+
+  --accent: #4f46e5;
+  --accent-hover: #6366f1;
+  --accent-glow: rgba(79, 70, 229, 0.2);
+  --accent-subtle: rgba(79, 70, 229, 0.06);
+
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.15);
+
+  --terminal-green: #22c55e;
+  --terminal-prompt: #4f46e5;
+  --terminal-cursor: #4f46e5;
+
+  --nav-bg: rgba(250, 250, 250, 0.85);
+  --nav-border: rgba(0, 0, 0, 0.06);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 20px var(--accent-glow);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================
+   VIEW TRANSITION — WAVE EFFECT
+   ============================================ */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+  animation: wave-reveal 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes wave-reveal {
+  from {
+    clip-path: circle(0% at var(--wave-x, 50%) var(--wave-y, 50%));
+  }
+  to {
+    clip-path: circle(150% at var(--wave-x, 50%) var(--wave-y, 50%));
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s ease;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* ============================================
+   TERMINAL STYLES
+   ============================================ */
+
+.terminal-text {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background: var(--terminal-cursor);
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ============================================
+   GLOW EFFECTS
+   ============================================ */
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), var(--cyan), var(--accent));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   GRADIENT TEXT
+   ============================================ */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 50%, var(--accent-hover) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   BENTO GRID TILT
+   ============================================ */
+
+.bento-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.1s ease;
+}
+
+.bento-card-inner {
+  transform: translateZ(20px);
+}
+
+/* ============================================
+   SECTION STYLES
+   ============================================ */
+
+.section {
+  padding: 6rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 8rem 2rem;
+  }
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--cyan));
+  border-radius: 2px;
+}
+
+/* ============================================
+   EASTER EGG CONSOLE
+   ============================================ */
+/* Check the console ;) — loaded via layout.tsx script */

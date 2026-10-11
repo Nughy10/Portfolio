@@ -1,0 +1,122 @@
+'use client';
+
+import { useRef } from 'react';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+export default function ExperienceTimeline() {
+  const { t } = useLanguage();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 0.8], ['0%', '100%']);
+
+  return (
+    <section id="experience" className="section" ref={ref}>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="section-title">{t.experience.title}</h2>
+
+        <div className="relative mt-12 ml-4 md:ml-0">
+          {/* Animated vertical line */}
+          <div
+            className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2"
+            style={{ background: 'var(--border)' }}
+          >
+            <motion.div
+              className="w-full rounded-full"
+              style={{
+                height: lineHeight,
+                background: 'linear-gradient(180deg, var(--accent), var(--cyan))',
+              }}
+            />
+          </div>
+
+          {/* Timeline items */}
+          {t.experience.jobs.map((job, i) => {
+            const isLeft = i % 2 === 0;
+
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
+                className={`relative mb-12 md:w-1/2 pl-8 md:pl-0 ${
+                  isLeft ? 'md:pr-12 md:text-right' : 'md:ml-auto md:pl-12'
+                }`}
+              >
+                {/* Dot on the line */}
+                <div
+                  className={`absolute top-2 w-4 h-4 rounded-full border-2 z-10 -left-2 ${
+                    isLeft ? 'md:left-auto md:-right-2' : 'md:-left-2'
+                  }`}
+                  style={{
+                    borderColor: 'var(--accent)',
+                    background: 'var(--bg-primary)',
+                  }}
+                />
+
+                {/* Card */}
+                <div
+                  className="p-5 rounded-xl border transition-all duration-300 hover:border-opacity-50 glow-border"
+                  style={{
+                    background: 'var(--bg-card)',
+                    borderColor: 'var(--border)',
+                  }}
+                >
+                  <div className={`flex flex-col ${isLeft ? 'md:items-end' : ''}`}>
+                    <span
+                      className="text-xs terminal-text font-medium px-2 py-0.5 rounded-full mb-2 inline-block w-fit"
+                      style={{
+                        background: 'var(--accent-subtle)',
+                        color: 'var(--accent)',
+                      }}
+                    >
+                      {job.period}
+                    </span>
+                    <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+                      {job.company}
+                    </h3>
+                    <p className="text-sm font-medium mb-2" style={{ color: 'var(--accent)' }}>
+                      {job.role}
+                    </p>
+                    <p
+                      className="text-sm mb-3 leading-relaxed"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      {job.description}
+                    </p>
+                    <div className={`flex flex-wrap gap-1.5 ${isLeft ? 'md:justify-end' : ''}`}>
+                      {job.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="text-xs px-2 py-0.5 rounded-md terminal-text"
+                          style={{
+                            background: 'var(--bg-primary)',
+                            color: 'var(--text-muted)',
+                            border: '1px solid var(--border)',
+                          }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </motion.div>
+    </section>
+  );
+}
