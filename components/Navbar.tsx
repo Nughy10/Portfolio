@@ -159,7 +159,7 @@ export default function Navbar() {
 
               {/* Download CV */}
               <motion.a
-                href={locale === 'es' ? '/cv-es.pdf' : '/cv-en.pdf'}
+                href={locale === 'es' ? '/C.V._ES_Pau_Isach_Noguera.pdf' : '/C.V._EN_Pau_Isach_Noguera.pdf'}
                 download
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

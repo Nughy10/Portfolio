@@ -13,43 +13,44 @@ export const translations = {
     },
     hero: {
       greeting: 'Hola, soy',
-      role: 'Full-Stack Developer',
+      role: 'Analista Programador Full-Stack | Especialista en Automatización',
+      welcome: 'Bienvenido al Terminal del Portfolio de Pau v1.0.0',
       hint: 'Escribe "help" para ver los comandos disponibles',
       commands: {
         help: `Comandos disponibles:
   about     → Sobre mí
   skills    → Stack tecnológico
   exp       → Experiencia profesional
-  projects  → Proyectos personales
+  projects  → Proyectos profesionales
   contact   → Información de contacto
   clear     → Limpiar terminal`,
         about: `> Pau Isach Noguera
-  Full-Stack Developer con +4 años de experiencia
-  Especializado en Angular, React, Vue.js, Java/Spring Boot
+  Analista Programador Full-Stack & Especialista en Automatización
+  5+ años en banca digital, sector público y automatización
   Background en Ingeniería Electrónica y Telecomunicaciones
-  Apasionado por arquitecturas limpias y soluciones escalables`,
+  Disponible para posiciones remotas e internacionales`,
         skills: `> Tech Stack
   Frontend  → Angular, React, Next.js, Vue.js, TypeScript
   Backend   → Java, Spring Boot, Node.js, Python
-  DevOps    → Docker, Jenkins, SonarQube, Git
-  DB        → PostgreSQL, MySQL, MongoDB`,
+  DevOps    → Docker, Jenkins, SonarQube, Git, Linux
+  DB        → PostgreSQL, MySQL`,
         exp: `> Experiencia Profesional
-  2024-Act  → Zener Soft Consulting | Full-Stack Dev
-  2022-2024 → Indra/Minsait (BBVA) | Full-Stack Dev
-  2021-2022 → Tag Systems Group | Full-Stack Dev
-  2018-2020 → Tavil IND | Automation Engineer`,
-        projects: `> Proyectos Personales
-  sessio-app.vercel.app     → AI Client Retention (Next.js)
-  nughy10.github.io/Gym/    → Gym Tracker (React)
-  nughy10.github.io/Pokedex → Pokédex (React)
-  nughy10.github.io/Rick-Morty → Rick & Morty App (React)
+  2024-Act  → Zener Soft Consulting | Analista Programador
+  2022-2024 → Indra/Minsait (BBVA) | Desarrollador Full-Stack
+  2021-2022 → Tag Systems Group | Full-Stack y Automatización
+  2018-2020 → Tavil IND S.A.U. | Automatización y Robótica`,
+        projects: `> Proyectos Profesionales
+  sessiohq.com           → SaaS retención clientes con IA
+  codigohombre.es        → Gestión de clientes
+  introns.org            → Colección NFT
+  721.harddiskmuseum.com → Marketplace NFT
 
   Escribe "open <proyecto>" para más detalles`,
         contact: `> Contacto
   Email     → pau.nughy@gmail.com
   LinkedIn  → linkedin.com/in/pau-isach-noguera
   GitHub    → github.com/Nughy10
-  Ubicación → Barcelona, España`,
+  Ubicación → España`,
         clear: '',
         unknown: 'Comando no reconocido. Escribe "help" para ver los comandos.',
       },
@@ -57,20 +58,20 @@ export const translations = {
     about: {
       title: 'Sobre mí',
       bio: [
-        'Ingeniero Electrónico reconvertido a Full-Stack Developer con más de 4 años de experiencia en desarrollo web profesional.',
-        'Mi background en ingeniería me dio una base sólida en resolución de problemas y pensamiento analítico que aplico diariamente en el desarrollo de software.',
-        'He trabajado en proyectos de gran escala para clientes como BBVA, implementando arquitecturas de microservicios con Java/Spring Boot y frontends con Angular, React y Vue.js.',
-        'Me apasiona crear soluciones limpias, escalables y con impacto real. Busco un equipo donde seguir creciendo técnicamente y aportar valor desde el primer día.',
+        'Analista Programador Full-Stack & Especialista en Automatización con 5+ años de experiencia en banca digital, sector público y sistemas automatizables.',
+        'Mi background en Ingeniería Electrónica y Telecomunicaciones me dio una base sólida en resolución de problemas y pensamiento analítico que aplico diariamente en el desarrollo de software.',
+        'He trabajado en proyectos de gran escala como BBVA (banca digital), ONT (coordinación de trasplantes) y Tesoro Público (gestión financiera estatal), implementando arquitecturas de microservicios con Java/Spring Boot y frontends con Angular, React y Vue.js.',
+        'Profesional autónomo, versátil y orientado a resultados. Disponible para posiciones remotas, nacionales e internacionales.',
       ],
     },
     skills: {
       title: 'Skills',
       categories: {
         frontend: 'Frontend',
-        backend: 'Backend',
-        devops: 'DevOps & Tools',
-        architecture: 'Arquitectura',
-        automation: 'Automatización',
+        backend: 'Backend y Bases de Datos',
+        devops: 'DevOps y Cloud',
+        architecture: 'Arquitectura y Microservicios',
+        automation: 'Automatización e Ingeniería',
         languages: 'Idiomas',
       },
     },
@@ -80,35 +81,35 @@ export const translations = {
       jobs: [
         {
           company: 'Zener Soft Consulting',
-          role: 'Full-Stack Developer',
+          role: 'Analista Programador',
           period: 'Q1/2024 - Actualidad',
-          location: 'Barcelona',
-          description: 'Desarrollo full-stack con Angular 17 y Vue.js en frontend, Java con Spring Boot en backend. Arquitectura de microservicios con Docker, RabbitMQ, Eureka. Despliegue con Jenkins, SonarQube, Nexus y Portainer.',
-          tech: ['Angular 17', 'Vue.js', 'Java', 'Spring Boot', 'Docker', 'RabbitMQ', 'Jenkins'],
+          location: 'España',
+          description: 'Consultoría de tecnologías de la información en el sector público. Participé en dos proyectos: ONT (coordinación de trasplantes, donantes y pacientes) y Tesoro Público (gestión financiera estatal).',
+          tech: ['Angular', 'Vue.js', 'TypeScript', 'Java', 'Spring Boot', 'Docker', 'RabbitMQ', 'Jenkins'],
         },
         {
-          company: 'Indra / Minsait — BBVA',
-          role: 'Full-Stack Developer',
+          company: 'Indra (Minsait) — BBVA',
+          role: 'Desarrollador Full-Stack',
           period: 'Q3/2022 - Q1/2024',
-          location: 'Barcelona',
-          description: 'Desarrollo de aplicaciones web para BBVA. Frontend con React y backend con Java/Spring Boot. APIs RESTful, PostgreSQL, metodologías ágiles con Scrum.',
-          tech: ['React', 'Java', 'Spring Boot', 'PostgreSQL', 'REST APIs', 'Scrum'],
+          location: 'España',
+          description: 'Empresa multinacional española líder en consultoría de transformación digital. Proyecto en BBVA desarrollando herramientas internas de gestión y soporte para el área de pagos y banca digital.',
+          tech: ['React.js', 'TypeScript', 'Bootstrap', 'Java', 'Spring Boot', 'PostgreSQL', 'Docker', 'Git'],
         },
         {
           company: 'Tag Systems Group',
-          role: 'Full-Stack Developer',
+          role: 'Desarrollador Full-Stack y Automatización',
           period: 'Q3/2021 - Q3/2022',
-          location: 'Barcelona',
-          description: 'Desarrollo web con React en frontend y Python/Node.js en backend. Integración de APIs y gestión de bases de datos.',
-          tech: ['React', 'Python', 'Node.js', 'JavaScript', 'REST APIs'],
+          location: 'España',
+          description: 'Grupo internacional especializado en fabricación, personalización y distribución de tarjetas inteligentes. Desarrollé software para pagos móviles, tokenización de tarjetas y automatización de procesos de fabricación.',
+          tech: ['React.js', 'JavaScript', 'Python', 'Node.js', 'MySQL', 'Docker', 'Keycloak', 'Git'],
         },
         {
-          company: 'Tavil IND',
-          role: 'Automation Engineer',
+          company: 'Tavil IND S.A.U.',
+          role: 'Desarrollador en Automatización y Robótica',
           period: 'Q3/2018 - Q4/2020',
-          location: 'Barcelona',
-          description: 'Programación de PLCs (Siemens, B&R) y robots industriales (KUKA, FANUC, ABB). Automatización de líneas de producción con Python y Structured Text.',
-          tech: ['Python', 'PLC Siemens', 'KUKA', 'FANUC', 'ABB', 'Structured Text'],
+          location: 'España',
+          description: 'Empresa líder en automatización industrial especializada en líneas automáticas de encajado y paletización. Desarrollé software de programación PLC y robótica para sistemas automáticos de pick & place y paletización de productos.',
+          tech: ['Python', 'ST', 'Siemens', 'B&R', 'KUKA', 'FANUC', 'ABB', 'Bihl+Wiedemann'],
         },
       ],
     },
@@ -118,53 +119,53 @@ export const translations = {
       viewLive: 'Ver Demo',
       items: [
         {
-          name: 'Sessio',
-          description: 'Plataforma SaaS de retención de clientes con IA para coaches y profesionales del fitness. Dashboard con métricas predictivas.',
-          tech: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Supabase', 'OpenAI'],
-          live: 'https://sessio-app.vercel.app',
-          github: 'https://github.com/Nughy10/sessio',
+          name: 'Sessio HQ',
+          description: 'SaaS de retención de clientes con IA para coaches y terapeutas.',
+          tech: ['Next.js', 'Supabase', 'Vercel', 'Cloudflare', 'Stripe', 'Claude API'],
+          live: 'https://sessiohq.com',
+          github: '',
         },
         {
-          name: 'Gym Tracker',
-          description: 'Aplicación para registro y seguimiento de entrenamientos en el gimnasio con progresión de cargas.',
-          tech: ['React', 'JavaScript', 'CSS3'],
-          live: 'https://nughy10.github.io/Gym/',
-          github: 'https://github.com/Nughy10/Gym',
+          name: 'Código Hombre',
+          description: 'Aplicación para la gestión de clientes de Roger Ubach.',
+          tech: ['Next.js', 'Supabase', 'Vercel', 'Cloudflare', 'Stripe', 'Resend'],
+          live: 'https://codigohombre.es',
+          github: '',
         },
         {
-          name: 'Pokédex',
-          description: 'Pokédex interactiva con búsqueda, filtrado y detalles de cada Pokémon consumiendo la PokéAPI.',
-          tech: ['React', 'JavaScript', 'REST API', 'CSS3'],
-          live: 'https://nughy10.github.io/Pokedex',
-          github: 'https://github.com/Nughy10/Pokedex',
+          name: 'RPSLS',
+          description: 'Aplicación "Piedra, Papel, Tijera, Lagarto, Spock".',
+          tech: ['LitElement', 'JavaScript', 'HTML5', 'CSS3', 'Netlify'],
+          live: 'http://capable-entremet-55d8c2.netlify.app/',
+          github: '',
         },
         {
-          name: 'Rick & Morty App',
-          description: 'Aplicación para explorar personajes de Rick and Morty con filtrado y paginación.',
-          tech: ['React', 'JavaScript', 'REST API', 'CSS3'],
-          live: 'https://nughy10.github.io/Rick-Morty',
-          github: 'https://github.com/Nughy10/Rick-Morty',
+          name: 'Introns',
+          description: 'Colección de NFTs de Solimán López.',
+          tech: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
+          live: 'http://introns.org/#/',
+          github: '',
         },
         {
-          name: 'Shopping App',
-          description: 'E-commerce con carrito de compras, gestión de productos y flujo de checkout.',
-          tech: ['React', 'JavaScript', 'CSS3'],
-          live: 'https://nughy10.github.io/Shopping',
-          github: 'https://github.com/Nughy10/Shopping',
+          name: 'Celeste',
+          description: 'Proyecto artístico digital de Solimán López.',
+          tech: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
+          live: 'http://celeste.solimanlopez.com/',
+          github: '',
         },
         {
-          name: 'Spotify Clone',
-          description: 'Clon visual de Spotify con reproducción de música y navegación por artistas y playlists.',
-          tech: ['React', 'JavaScript', 'Spotify API', 'CSS3'],
-          live: 'https://nughy10.github.io/Spotify',
-          github: 'https://github.com/Nughy10/Spotify',
+          name: 'HDM Marketplace',
+          description: 'Marketplace de NFTs del Harddiskmuseum.',
+          tech: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
+          live: 'http://721.harddiskmuseum.com/',
+          github: '',
         },
         {
-          name: 'Football App',
-          description: 'Aplicación de seguimiento de resultados y clasificaciones de fútbol en tiempo real.',
-          tech: ['React', 'JavaScript', 'REST API', 'CSS3'],
-          live: 'https://nughy10.github.io/Football',
-          github: 'https://github.com/Nughy10/Football',
+          name: 'HDM Radar',
+          description: 'Colección NFT para los artistas del Harddiskmuseum.',
+          tech: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
+          live: 'http://radar.harddiskmuseum.com/',
+          github: '',
         },
       ],
     },
@@ -172,35 +173,35 @@ export const translations = {
       title: 'Formación',
       degrees: [
         {
-          title: 'Full-Stack Web Development Bootcamp',
-          institution: 'Upgrade Hub',
+          title: 'Curso de Programación Full-Stack',
+          institution: 'Upgrade Hub / Madrid - Remoto',
           year: '2021',
           description: 'Bootcamp intensivo de desarrollo web full-stack: React, Node.js, bases de datos, despliegue.',
         },
         {
           title: 'Grado en Ingeniería Electrónica y Telecomunicaciones',
-          institution: 'Universitat de Barcelona (UB)',
+          institution: 'Universidad de Barcelona / Facultad de Física',
           year: '2018',
           description: 'Formación en electrónica, programación, telecomunicaciones y automatización industrial.',
         },
       ],
-      certificationsTitle: 'Certificaciones',
+      certificationsTitle: 'Licencias y Certificaciones',
       certifications: [
-        'Programación PLC Siemens TIA Portal (2019)',
-        'Programación PLC B&R Automation Studio (2019)',
-        'Programación Robot KUKA (2019)',
-        'Programación Robot FANUC (2019)',
-        'Programación Robot ABB — RobotStudio (2019)',
-        'Structured Text (ST) — IEC 61131-3 (2019)',
+        'Automation Studio Control / Motion & Visual Components – B&R Industrial Automation (2019)',
+        'TIA PORTAL / WinCC – Siemens (2019)',
+        'KUKA Robots Programming P1 & P2 – KUKA (2019)',
+        'IRPickTool & IRVision / TPE Programming – FANUC (2019)',
+        'IRC5 / Pick Master 3.0 – ABB (2019)',
+        'AS-I 3.0 & AS-I Safety – Bihl + Wiedemann (2019)',
       ],
     },
     contact: {
       title: 'Contacto',
       subtitle: '¿Hablamos?',
-      description: 'Estoy buscando nuevas oportunidades. Si crees que puedo aportar valor a tu equipo, no dudes en contactarme.',
+      description: 'Estoy buscando nuevas oportunidades. Incorporación inmediata, 100% remoto, zona horaria flexible (CET). Si crees que puedo aportar valor a tu equipo, no dudes en contactarme.',
       email: 'Email',
       location: 'Ubicación',
-      locationValue: 'Barcelona, España',
+      locationValue: 'España',
       sendMessage: 'Enviar mensaje',
     },
     footer: {
@@ -221,43 +222,44 @@ export const translations = {
     },
     hero: {
       greeting: "Hi, I'm",
-      role: 'Full-Stack Developer',
+      role: 'Full-Stack Analyst Developer | Automation Specialist',
+      welcome: "Welcome to Pau's Portfolio Terminal v1.0.0",
       hint: 'Type "help" to see available commands',
       commands: {
         help: `Available commands:
   about     → About me
   skills    → Tech stack
   exp       → Professional experience
-  projects  → Personal projects
+  projects  → Professional projects
   contact   → Contact info
   clear     → Clear terminal`,
         about: `> Pau Isach Noguera
-  Full-Stack Developer with 4+ years of experience
-  Specialized in Angular, React, Vue.js, Java/Spring Boot
+  Full-Stack Analyst Developer & Automation Specialist
+  5+ years in digital banking, public sector & automation
   Background in Electronics & Telecom Engineering
-  Passionate about clean architecture and scalable solutions`,
+  Available for remote and international positions`,
         skills: `> Tech Stack
   Frontend  → Angular, React, Next.js, Vue.js, TypeScript
   Backend   → Java, Spring Boot, Node.js, Python
-  DevOps    → Docker, Jenkins, SonarQube, Git
-  DB        → PostgreSQL, MySQL, MongoDB`,
+  DevOps    → Docker, Jenkins, SonarQube, Git, Linux
+  DB        → PostgreSQL, MySQL`,
         exp: `> Professional Experience
-  2024-Now  → Zener Soft Consulting | Full-Stack Dev
-  2022-2024 → Indra/Minsait (BBVA) | Full-Stack Dev
-  2021-2022 → Tag Systems Group | Full-Stack Dev
-  2018-2020 → Tavil IND | Automation Engineer`,
-        projects: `> Personal Projects
-  sessio-app.vercel.app     → AI Client Retention (Next.js)
-  nughy10.github.io/Gym/    → Gym Tracker (React)
-  nughy10.github.io/Pokedex → Pokédex (React)
-  nughy10.github.io/Rick-Morty → Rick & Morty App (React)
+  2024-Now  → Zener Soft Consulting | Programmer Analyst
+  2022-2024 → Indra/Minsait (BBVA) | Full-Stack Developer
+  2021-2022 → Tag Systems Group | Full-Stack & Automation Dev
+  2018-2020 → Tavil IND S.A.U. | Automation & Robotics Dev`,
+        projects: `> Professional Projects
+  sessiohq.com           → AI Customer Retention SaaS
+  codigohombre.es        → Client Management App
+  introns.org            → NFT Collection
+  721.harddiskmuseum.com → NFT Marketplace
 
   Type "open <project>" for more details`,
         contact: `> Contact
   Email     → pau.nughy@gmail.com
   LinkedIn  → linkedin.com/in/pau-isach-noguera
   GitHub    → github.com/Nughy10
-  Location  → Barcelona, Spain`,
+  Location  → Spain`,
         clear: '',
         unknown: 'Command not recognized. Type "help" to see available commands.',
       },
@@ -265,20 +267,20 @@ export const translations = {
     about: {
       title: 'About Me',
       bio: [
-        'Electronics Engineer turned Full-Stack Developer with 4+ years of professional web development experience.',
-        'My engineering background gave me a solid foundation in problem-solving and analytical thinking that I apply daily in software development.',
-        "I've worked on large-scale projects for clients like BBVA, implementing microservice architectures with Java/Spring Boot and frontends with Angular, React, and Vue.js.",
-        "I'm passionate about creating clean, scalable solutions with real impact. I'm looking for a team where I can keep growing technically and add value from day one.",
+        'Full-Stack Analyst Developer & Automation Specialist with 5+ years of experience in digital banking, public sector, and automation systems.',
+        'My background in Electronics & Telecommunications Engineering gave me a solid foundation in problem-solving and analytical thinking that I apply daily in software development.',
+        "I've worked on large-scale projects such as BBVA (digital banking), ONT (transplant coordination) and Tesoro Público (state financial management), implementing microservice architectures with Java/Spring Boot and frontends with Angular, React, and Vue.js.",
+        'Self-directed professional, versatile and results-oriented. Available for remote, national and international positions.',
       ],
     },
     skills: {
       title: 'Skills',
       categories: {
         frontend: 'Frontend',
-        backend: 'Backend',
-        devops: 'DevOps & Tools',
-        architecture: 'Architecture',
-        automation: 'Automation',
+        backend: 'Backend & Databases',
+        devops: 'DevOps & Cloud',
+        architecture: 'Architecture & Microservices',
+        automation: 'Automation & Engineering',
         languages: 'Languages',
       },
     },
@@ -288,35 +290,35 @@ export const translations = {
       jobs: [
         {
           company: 'Zener Soft Consulting',
-          role: 'Full-Stack Developer',
+          role: 'Programmer Analyst',
           period: 'Q1/2024 - Present',
-          location: 'Barcelona',
-          description: 'Full-stack development with Angular 17 and Vue.js on the frontend, Java with Spring Boot on the backend. Microservices architecture with Docker, RabbitMQ, Eureka. CI/CD with Jenkins, SonarQube, Nexus, and Portainer.',
-          tech: ['Angular 17', 'Vue.js', 'Java', 'Spring Boot', 'Docker', 'RabbitMQ', 'Jenkins'],
+          location: 'Spain',
+          description: 'Information technology consulting in the public sector. Participated in two projects: ONT (coordination of transplants, donors and patients) and Tesoro Público (state financial management).',
+          tech: ['Angular', 'Vue.js', 'TypeScript', 'Java', 'Spring Boot', 'Docker', 'RabbitMQ', 'Jenkins'],
         },
         {
-          company: 'Indra / Minsait — BBVA',
+          company: 'Indra (Minsait) — BBVA',
           role: 'Full-Stack Developer',
           period: 'Q3/2022 - Q1/2024',
-          location: 'Barcelona',
-          description: 'Web application development for BBVA. Frontend with React and backend with Java/Spring Boot. RESTful APIs, PostgreSQL, agile methodologies with Scrum.',
-          tech: ['React', 'Java', 'Spring Boot', 'PostgreSQL', 'REST APIs', 'Scrum'],
+          location: 'Spain',
+          description: 'Multinational Spanish company leading digital transformation consulting and information technology. BBVA project developing internal management and support tools for the payments and digital banking area.',
+          tech: ['React.js', 'TypeScript', 'Bootstrap', 'Java', 'Spring Boot', 'PostgreSQL', 'Docker', 'Git'],
         },
         {
           company: 'Tag Systems Group',
-          role: 'Full-Stack Developer',
+          role: 'Full-Stack and Automation Developer',
           period: 'Q3/2021 - Q3/2022',
-          location: 'Barcelona',
-          description: 'Web development with React on the frontend and Python/Node.js on the backend. API integration and database management.',
-          tech: ['React', 'Python', 'Node.js', 'JavaScript', 'REST APIs'],
+          location: 'Spain',
+          description: 'International group specialized in manufacturing, customization and distribution of smart cards. Developed software for mobile payments, card tokenization and automation of manufacturing processes.',
+          tech: ['React.js', 'JavaScript', 'Python', 'Node.js', 'MySQL', 'Docker', 'Keycloak', 'Git'],
         },
         {
-          company: 'Tavil IND',
-          role: 'Automation Engineer',
+          company: 'Tavil IND S.A.U.',
+          role: 'Automation and Robotics Developer',
           period: 'Q3/2018 - Q4/2020',
-          location: 'Barcelona',
-          description: 'PLC programming (Siemens, B&R) and industrial robots (KUKA, FANUC, ABB). Production line automation with Python and Structured Text.',
-          tech: ['Python', 'PLC Siemens', 'KUKA', 'FANUC', 'ABB', 'Structured Text'],
+          location: 'Spain',
+          description: 'Company leading in industrial automation specialized in automatic boxing and palletizing lines. Developed PLC programming software and robotics for automatic pick & place and product palletization systems.',
+          tech: ['Python', 'ST', 'Siemens', 'B&R', 'KUKA', 'FANUC', 'ABB', 'Bihl+Wiedemann'],
         },
       ],
     },
@@ -326,53 +328,53 @@ export const translations = {
       viewLive: 'Live Demo',
       items: [
         {
-          name: 'Sessio',
-          description: 'SaaS platform for AI-powered client retention for coaches and fitness professionals. Dashboard with predictive metrics.',
-          tech: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Supabase', 'OpenAI'],
-          live: 'https://sessio-app.vercel.app',
-          github: 'https://github.com/Nughy10/sessio',
+          name: 'Sessio HQ',
+          description: 'SaaS for customer retention with AI for coaches and therapists.',
+          tech: ['Next.js', 'Supabase', 'Vercel', 'Cloudflare', 'Stripe', 'Claude API'],
+          live: 'https://sessiohq.com',
+          github: '',
         },
         {
-          name: 'Gym Tracker',
-          description: 'Application for logging and tracking gym workouts with load progression.',
-          tech: ['React', 'JavaScript', 'CSS3'],
-          live: 'https://nughy10.github.io/Gym/',
-          github: 'https://github.com/Nughy10/Gym',
+          name: 'Código Hombre',
+          description: 'Application for client management for Roger Ubach.',
+          tech: ['Next.js', 'Supabase', 'Vercel', 'Cloudflare', 'Stripe', 'Resend'],
+          live: 'https://codigohombre.es',
+          github: '',
         },
         {
-          name: 'Pokédex',
-          description: 'Interactive Pokédex with search, filtering, and detailed Pokémon info using the PokéAPI.',
-          tech: ['React', 'JavaScript', 'REST API', 'CSS3'],
-          live: 'https://nughy10.github.io/Pokedex',
-          github: 'https://github.com/Nughy10/Pokedex',
+          name: 'RPSLS',
+          description: 'Application "Rock, Paper, Scissors, Lizard, Spock".',
+          tech: ['LitElement', 'JavaScript', 'HTML5', 'CSS3', 'Netlify'],
+          live: 'http://capable-entremet-55d8c2.netlify.app/',
+          github: '',
         },
         {
-          name: 'Rick & Morty App',
-          description: 'Application to explore Rick and Morty characters with filtering and pagination.',
-          tech: ['React', 'JavaScript', 'REST API', 'CSS3'],
-          live: 'https://nughy10.github.io/Rick-Morty',
-          github: 'https://github.com/Nughy10/Rick-Morty',
+          name: 'Introns',
+          description: 'NFT Collection of Solimán López.',
+          tech: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
+          live: 'http://introns.org/#/',
+          github: '',
         },
         {
-          name: 'Shopping App',
-          description: 'E-commerce with shopping cart, product management, and checkout flow.',
-          tech: ['React', 'JavaScript', 'CSS3'],
-          live: 'https://nughy10.github.io/Shopping',
-          github: 'https://github.com/Nughy10/Shopping',
+          name: 'Celeste',
+          description: 'Digital art project of Solimán López.',
+          tech: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
+          live: 'http://celeste.solimanlopez.com/',
+          github: '',
         },
         {
-          name: 'Spotify Clone',
-          description: 'Visual Spotify clone with music playback and artist/playlist navigation.',
-          tech: ['React', 'JavaScript', 'Spotify API', 'CSS3'],
-          live: 'https://nughy10.github.io/Spotify',
-          github: 'https://github.com/Nughy10/Spotify',
+          name: 'HDM Marketplace',
+          description: 'Marketplace of NFTs from Harddiskmuseum.',
+          tech: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
+          live: 'http://721.harddiskmuseum.com/',
+          github: '',
         },
         {
-          name: 'Football App',
-          description: 'Real-time football scores and standings tracking application.',
-          tech: ['React', 'JavaScript', 'REST API', 'CSS3'],
-          live: 'https://nughy10.github.io/Football',
-          github: 'https://github.com/Nughy10/Football',
+          name: 'HDM Radar',
+          description: 'NFT Collection for artists from Harddiskmuseum.',
+          tech: ['React.js', 'JavaScript', 'HTML5', 'CSS3'],
+          live: 'http://radar.harddiskmuseum.com/',
+          github: '',
         },
       ],
     },
@@ -380,35 +382,35 @@ export const translations = {
       title: 'Education',
       degrees: [
         {
-          title: 'Full-Stack Web Development Bootcamp',
-          institution: 'Upgrade Hub',
+          title: 'Full-Stack Programming Bootcamp',
+          institution: 'Upgrade Hub / Madrid - Remote',
           year: '2021',
           description: 'Intensive full-stack web development bootcamp: React, Node.js, databases, deployment.',
         },
         {
-          title: 'Electronics & Telecommunications Engineering Degree',
-          institution: 'University of Barcelona (UB)',
+          title: 'Degree in Electronics & Telecommunications Engineering',
+          institution: 'University of Barcelona / Faculty of Physics',
           year: '2018',
           description: 'Training in electronics, programming, telecommunications, and industrial automation.',
         },
       ],
-      certificationsTitle: 'Certifications',
+      certificationsTitle: 'Licenses and Certifications',
       certifications: [
-        'PLC Programming Siemens TIA Portal (2019)',
-        'PLC Programming B&R Automation Studio (2019)',
-        'KUKA Robot Programming (2019)',
-        'FANUC Robot Programming (2019)',
-        'ABB Robot Programming — RobotStudio (2019)',
-        'Structured Text (ST) — IEC 61131-3 (2019)',
+        'Automation Studio Control / Motion & Visual Components – B&R Industrial Automation (2019)',
+        'TIA PORTAL / WinCC – Siemens (2019)',
+        'KUKA Robots Programming P1 & P2 – KUKA (2019)',
+        'IRPickTool & IRVision / TPE Programming – FANUC (2019)',
+        'IRC5 / Pick Master 3.0 – ABB (2019)',
+        'AS-I 3.0 & AS-I Safety – Bihl + Wiedemann (2019)',
       ],
     },
     contact: {
       title: 'Contact',
       subtitle: "Let's talk",
-      description: "I'm looking for new opportunities. If you think I can add value to your team, don't hesitate to reach out.",
+      description: "I'm looking for new opportunities. Immediate incorporation, 100% remote, flexible timezone (CET). If you think I can add value to your team, don't hesitate to reach out.",
       email: 'Email',
       location: 'Location',
-      locationValue: 'Barcelona, Spain',
+      locationValue: 'Spain',
       sendMessage: 'Send message',
     },
     footer: {
@@ -424,13 +426,14 @@ export const skillsData = {
     icon: '🎨',
     items: [
       { name: 'Angular', level: 90 },
-      { name: 'React', level: 88 },
+      { name: 'React.js', level: 88 },
       { name: 'Next.js', level: 80 },
       { name: 'Vue.js', level: 82 },
       { name: 'TypeScript', level: 88 },
       { name: 'JavaScript', level: 92 },
       { name: 'HTML5', level: 95 },
-      { name: 'CSS3 / Tailwind', level: 90 },
+      { name: 'CSS3', level: 90 },
+      { name: 'Bootstrap', level: 85 },
     ],
   },
   backend: {
@@ -451,9 +454,10 @@ export const skillsData = {
       { name: 'Docker', level: 80 },
       { name: 'Jenkins', level: 75 },
       { name: 'SonarQube', level: 72 },
+      { name: 'Nexus', level: 70 },
+      { name: 'Portainer', level: 70 },
       { name: 'Git', level: 90 },
       { name: 'Linux', level: 78 },
-      { name: 'Portainer', level: 70 },
     ],
   },
   architecture: {
@@ -468,11 +472,14 @@ export const skillsData = {
   automation: {
     icon: '🤖',
     items: [
-      { name: 'PLC Siemens', level: 82 },
-      { name: 'PLC B&R', level: 78 },
+      { name: 'Python', level: 82 },
+      { name: 'Structured Text (ST)', level: 80 },
+      { name: 'Siemens', level: 82 },
+      { name: 'B&R', level: 78 },
       { name: 'KUKA', level: 75 },
       { name: 'FANUC', level: 75 },
       { name: 'ABB', level: 72 },
+      { name: 'Bihl + Wiedemann', level: 70 },
     ],
   },
   languages: {

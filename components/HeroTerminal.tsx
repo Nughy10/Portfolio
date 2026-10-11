@@ -10,7 +10,7 @@ interface TerminalLine {
 }
 
 export default function HeroTerminal() {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<TerminalLine[]>([]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -21,6 +21,11 @@ export default function HeroTerminal() {
   const [displayedText, setDisplayedText] = useState('');
 
   const commands = t.hero.commands;
+
+  // Clear terminal history when language changes
+  useEffect(() => {
+    setHistory([]);
+  }, [locale]);
 
   // Typewriter effect for greeting
   const fullText = `${t.hero.greeting} Pau Isach Noguera`;
@@ -125,7 +130,7 @@ export default function HeroTerminal() {
           transition={{ duration: 0.6 }}
           className="mb-8 text-center"
         >
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold mb-3 whitespace-nowrap">
             <span className="gradient-text">{displayedText}</span>
             {isTyping && <span className="terminal-cursor" />}
           </h1>
@@ -179,7 +184,7 @@ export default function HeroTerminal() {
             {/* Welcome message */}
             <div className="mb-4" style={{ color: 'var(--text-muted)' }}>
               <p style={{ color: 'var(--terminal-green)' }}>
-                Welcome to Pau&apos;s Portfolio Terminal v1.0.0
+                {t.hero.welcome}
               </p>
               <p className="mt-1">{t.hero.hint}</p>
             </div>
@@ -252,4 +257,3 @@ export default function HeroTerminal() {
     </section>
   );
 }
-
