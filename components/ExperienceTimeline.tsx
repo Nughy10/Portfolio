@@ -25,10 +25,10 @@ export default function ExperienceTimeline() {
       >
         <h2 className="section-title">{t.experience.title}</h2>
 
-        <div className="relative mt-12 ml-4 md:ml-0">
+        <div className="relative max-w-3xl mx-auto">
           {/* Animated vertical line */}
           <div
-            className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2"
+            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2"
             style={{ background: 'var(--border)' }}
           >
             <motion.div
@@ -47,17 +47,17 @@ export default function ExperienceTimeline() {
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
-                className={`relative mb-12 md:w-1/2 pl-8 md:pl-0 ${
-                  isLeft ? 'md:pr-12 md:text-right' : 'md:ml-auto md:pl-12'
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.15 + i * 0.12 }}
+                className={`relative mb-8 md:w-1/2 pl-10 md:pl-0 ${
+                  isLeft ? 'md:pr-8 md:text-right' : 'md:ml-auto md:pl-8'
                 }`}
               >
                 {/* Dot on the line */}
                 <div
-                  className={`absolute top-2 w-4 h-4 rounded-full border-2 z-10 -left-2 ${
-                    isLeft ? 'md:left-auto md:-right-2' : 'md:-left-2'
+                  className={`absolute top-3 w-3 h-3 rounded-full border-2 z-10 left-[10px] ${
+                    isLeft ? 'md:left-auto md:-right-[6px]' : 'md:-left-[6px]'
                   }`}
                   style={{
                     borderColor: 'var(--accent)',
@@ -67,7 +67,7 @@ export default function ExperienceTimeline() {
 
                 {/* Card */}
                 <div
-                  className="p-5 rounded-xl border transition-all duration-300 hover:border-opacity-50 glow-border"
+                  className="p-5 rounded-xl border transition-all duration-300 glow-border"
                   style={{
                     background: 'var(--bg-card)',
                     borderColor: 'var(--border)',
@@ -75,7 +75,7 @@ export default function ExperienceTimeline() {
                 >
                   <div className={`flex flex-col ${isLeft ? 'md:items-end' : ''}`}>
                     <span
-                      className="text-xs terminal-text font-medium px-2 py-0.5 rounded-full mb-2 inline-block w-fit"
+                      className="text-xs terminal-text font-medium px-2.5 py-1 rounded-full mb-2 inline-block w-fit"
                       style={{
                         background: 'var(--accent-subtle)',
                         color: 'var(--accent)',
@@ -83,10 +83,10 @@ export default function ExperienceTimeline() {
                     >
                       {job.period}
                     </span>
-                    <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+                    <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
                       {job.company}
                     </h3>
-                    <p className="text-sm font-medium mb-2" style={{ color: 'var(--accent)' }}>
+                    <p className="text-sm font-medium mb-2" style={{ color: 'var(--accent-hover)' }}>
                       {job.role}
                     </p>
                     <p
@@ -101,7 +101,7 @@ export default function ExperienceTimeline() {
                           key={tech}
                           className="text-xs px-2 py-0.5 rounded-md terminal-text"
                           style={{
-                            background: 'var(--bg-primary)',
+                            background: 'var(--bg-secondary)',
                             color: 'var(--text-muted)',
                             border: '1px solid var(--border)',
                           }}

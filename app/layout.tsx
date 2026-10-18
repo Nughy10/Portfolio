@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Pau Isach Noguera — Full-Stack Developer',
   description:
-    'Full-Stack Developer con +4 años de experiencia en Angular, React, Vue.js, Java/Spring Boot. Portfolio profesional.',
+    'Analista Programador Full-Stack con 5+ años de experiencia en Angular, React, Vue.js, Java/Spring Boot y automatización. Portfolio profesional.',
   keywords: [
     'Full-Stack Developer',
     'Angular',
@@ -30,14 +30,14 @@ export const metadata: Metadata = {
     'Java',
     'Spring Boot',
     'TypeScript',
-    'Barcelona',
+    'Automatización',
     'Portfolio',
   ],
   authors: [{ name: 'Pau Isach Noguera' }],
   openGraph: {
     title: 'Pau Isach Noguera — Full-Stack Developer',
     description:
-      'Full-Stack Developer con +4 años de experiencia. Angular, React, Vue.js, Java/Spring Boot.',
+      'Analista Programador Full-Stack con 5+ años de experiencia. Angular, React, Vue.js, Java/Spring Boot.',
     type: 'website',
     locale: 'es_ES',
     alternateLocale: 'en_US',
@@ -51,6 +51,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" data-theme="dark" suppressHydrationWarning>
+      <head>
+        {/* Apply the saved (or system) theme before first paint to avoid a flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(!t)t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider>
           <LanguageProvider>
@@ -74,7 +82,7 @@ export default function RootLayout({
                 'font-size: 14px; color: #a1a1aa;'
               );
               console.log(
-                '%cBuilt with Next.js 15 + TypeScript + Tailwind + Framer Motion',
+                '%cBuilt with Next.js 16 + TypeScript + Tailwind + Framer Motion',
                 'font-size: 12px; color: #6366f1; font-style: italic;'
               );
             `,

@@ -20,15 +20,9 @@ export default function Footer() {
           Framer Motion
         </span>{' '}
         {t.footer.by}{' '}
-        <a
-          href="https://github.com/Nughy10"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium hover:underline"
-          style={{ color: 'var(--text-primary)' }}
-        >
+        <span className="font-medium" style={{ color: 'var(--text-primary)' }}>
           Pau Isach Noguera
-        </a>
+        </span>
       </p>
     </footer>
   );

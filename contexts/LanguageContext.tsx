@@ -1,13 +1,11 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
-import { translations, type Locale } from '@/data/i18n';
-
-type TranslationType = typeof translations.es;
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
+import { translations, type Locale, type Translations } from '@/data/i18n';
 
 interface LanguageContextType {
   locale: Locale;
-  t: TranslationType;
+  t: Translations;
   toggleLocale: () => void;
 }
 
@@ -16,8 +14,31 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>('es');
 
+  // Restore saved locale, or fall back to the browser language
+  useEffect(() => {
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem('locale');
+    } catch {}
+    const preferred = saved ?? (navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en');
+    if (preferred === 'en') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLocale('en');
+    }
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
   const toggleLocale = useCallback(() => {
-    setLocale((prev) => (prev === 'es' ? 'en' : 'es'));
+    setLocale((prev) => {
+      const next = prev === 'es' ? 'en' : 'es';
+      try {
+        localStorage.setItem('locale', next);
+      } catch {}
+      return next;
+    });
   }, []);
 
   const t = translations[locale];
@@ -36,4 +57,3 @@ export function useLanguage() {
   }
   return context;
 }
-

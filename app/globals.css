@@ -32,8 +32,16 @@
   --border-hover: rgba(255, 255, 255, 0.15);
 
   --terminal-green: #4ade80;
-  --terminal-prompt: #6366f1;
-  --terminal-cursor: #6366f1;
+  --terminal-prompt: #818cf8;
+  --terminal-cursor: #818cf8;
+  /* Text on the always-dark terminal / code editor surfaces */
+  --terminal-text: #e4e4e7;
+  --terminal-muted: #a1a1aa;
+  --terminal-border: rgba(255, 255, 255, 0.08);
+  --code-keyword: #fb7185;
+  --code-prop: #22d3ee;
+
+  color-scheme: dark;
 
   --nav-bg: rgba(10, 10, 15, 0.8);
   --nav-border: rgba(255, 255, 255, 0.06);
@@ -54,19 +62,24 @@
 
   --text-primary: #18181b;
   --text-secondary: #52525b;
-  --text-muted: #a1a1aa;
+  --text-muted: #71717a;
 
   --accent: #4f46e5;
   --accent-hover: #6366f1;
   --accent-glow: rgba(79, 70, 229, 0.2);
-  --accent-subtle: rgba(79, 70, 229, 0.06);
+  --accent-subtle: rgba(79, 70, 229, 0.08);
+
+  --green: #16a34a;
+  --cyan: #0891b2;
 
   --border: rgba(0, 0, 0, 0.08);
   --border-hover: rgba(0, 0, 0, 0.15);
 
-  --terminal-green: #22c55e;
-  --terminal-prompt: #4f46e5;
-  --terminal-cursor: #4f46e5;
+  --terminal-green: #4ade80;
+  --terminal-prompt: #818cf8;
+  --terminal-cursor: #818cf8;
+
+  color-scheme: light;
 
   --nav-bg: rgba(250, 250, 250, 0.85);
   --nav-border: rgba(0, 0, 0, 0.06);
@@ -106,165 +119,171 @@
 }
 
 /* ============================================
-   BASE STYLES
+   BASE STYLES (inside @layer base for Tailwind v4)
    ============================================ */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
 
-body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  transition: background 0.3s ease;
-}
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: clip;
+    transition: background 0.3s ease;
+  }
 
-/* ============================================
-   SCROLLBAR
-   ============================================ */
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-}
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 3px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 3px;
-}
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-hover);
-}
+  /* Tailwind v4 preflight leaves buttons with cursor: default */
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']),
+  a[href],
+  summary,
+  label[for],
+  select {
+    cursor: pointer;
+  }
 
-/* ============================================
-   SELECTION
-   ============================================ */
+  button:disabled {
+    cursor: not-allowed;
+  }
 
-::selection {
-  background: var(--accent);
-  color: white;
-}
-
-/* ============================================
-   TERMINAL STYLES
-   ============================================ */
-
-.terminal-text {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
-}
-
-.terminal-cursor {
-  display: inline-block;
-  width: 8px;
-  height: 18px;
-  background: var(--terminal-cursor);
-  animation: blink 1s step-end infinite;
-  vertical-align: text-bottom;
-  margin-left: 2px;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* ============================================
-   GLOW EFFECTS
-   ============================================ */
-
-.glow-border {
-  position: relative;
-}
-
-.glow-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--accent), var(--cyan), var(--accent));
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.glow-border:hover::before {
-  opacity: 1;
-}
-
-/* ============================================
-   GRADIENT TEXT
-   ============================================ */
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 50%, var(--accent-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ============================================
-   BENTO GRID TILT
-   ============================================ */
-
-.bento-card {
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  transition: transform 0.1s ease;
-}
-
-.bento-card-inner {
-  transform: translateZ(20px);
-}
-
-/* ============================================
-   SECTION STYLES
-   ============================================ */
-
-.section {
-  padding: 6rem 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-@media (min-width: 768px) {
-  .section {
-    padding: 8rem 2rem;
+  /* Selection */
+  ::selection {
+    background: var(--accent);
+    color: white;
   }
 }
 
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  position: relative;
-  display: inline-block;
+/* ============================================
+   COMPONENT STYLES (inside @layer components)
+   ============================================ */
+
+@layer components {
+  /* Terminal */
+  .terminal-text {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  }
+
+  .terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 18px;
+    background: var(--terminal-cursor);
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+  }
+
+  /* Glow effects */
+  .glow-border {
+    position: relative;
+  }
+
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--accent), var(--cyan), var(--accent));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .glow-border:hover::before {
+    opacity: 1;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 50%, var(--accent-hover) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Bento grid tilt */
+  .bento-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.1s ease;
+  }
+
+  .bento-card-inner {
+    transform: translateZ(20px);
+  }
+
+  /* Sections */
+  .section {
+    padding: 3.5rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    /* Keep slide-in animations from widening the page on mobile. */
+    overflow-x: clip;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      padding: 4.5rem 2rem;
+    }
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--cyan));
+    border-radius: 2px;
+  }
 }
 
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--cyan));
-  border-radius: 2px;
+/* Keyframes (outside layers — they work globally) */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* ============================================

@@ -1,51 +1,70 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react';
+import { flushSync } from 'react-dom';
 
 type Theme = 'dark' | 'light';
 
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: (x: number, y: number) => void;
-  isTransitioning: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+function applyTheme(theme: Theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  try {
+    localStorage.setItem('theme', theme);
+  } catch {}
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('dark');
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const isTransitioning = useRef(false);
 
+  // The inline script in layout.tsx already set data-theme before paint; sync state with it
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = useCallback((x: number, y: number) => {
-    if (isTransitioning) return;
-
-    // Check for View Transitions API support
-    if (!document.startViewTransition) {
-      setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-      return;
+    if (document.documentElement.getAttribute('data-theme') === 'light') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setTheme('light');
     }
+  }, []);
 
-    setIsTransitioning(true);
+  const toggleTheme = useCallback(
+    (x: number, y: number) => {
+      if (isTransitioning.current) return;
+      const next: Theme = theme === 'dark' ? 'light' : 'dark';
 
-    // Set CSS custom properties for the wave origin
-    document.documentElement.style.setProperty('--wave-x', `${x}px`);
-    document.documentElement.style.setProperty('--wave-y', `${y}px`);
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!document.startViewTransition || reduceMotion) {
+        applyTheme(next);
+        setTheme(next);
+        return;
+      }
 
-    const transition = document.startViewTransition(() => {
-      setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-    });
+      isTransitioning.current = true;
 
-    transition.finished.then(() => {
-      setIsTransitioning(false);
-    });
-  }, [isTransitioning]);
+      // Set CSS custom properties for the wave origin
+      document.documentElement.style.setProperty('--wave-x', `${x}px`);
+      document.documentElement.style.setProperty('--wave-y', `${y}px`);
+
+      // The DOM must be updated synchronously inside the callback so the
+      // "new" snapshot actually contains the new theme
+      const transition = document.startViewTransition(() => {
+        applyTheme(next);
+        flushSync(() => setTheme(next));
+      });
+
+      transition.finished.finally(() => {
+        isTransitioning.current = false;
+      });
+    },
+    [theme]
+  );
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, isTransitioning }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -58,4 +77,3 @@ export function useTheme() {
   }
   return context;
 }
-
