@@ -65,6 +65,7 @@ const es = {
       automation: 'Automatización e Ingeniería',
       languages: 'Idiomas',
     },
+    dragHint: 'Arrastra para hacerla girar',
     languageItems: [
       { name: 'Catalán', label: 'Nativo' },
       { name: 'Español', label: 'Nativo' },
@@ -114,6 +115,9 @@ const es = {
     viewCode: 'Ver Código',
     viewLive: 'Ver Demo',
     offline: 'Fuera de producción',
+    flipHint: 'Pulsa para girar',
+    flipBack: 'Volver',
+    visit: 'Visitar proyecto',
     offlineHint: 'Este proyecto no está desplegado actualmente, por lo que no se puede visitar.',
     items: [
       {
@@ -195,6 +199,7 @@ const es = {
       },
     ],
     certificationsTitle: 'Licencias y Certificaciones',
+    lineCaption: 'Línea de paletizado de certificaciones · un guiño a mis años programando robots en Tavil',
     certifications: [
       'Automation Studio Control / Motion & Visual Components – B&R Industrial Automation (2019)',
       'TIA PORTAL / WinCC – Siemens (2019)',
@@ -288,6 +293,7 @@ const en: Translations = {
       automation: 'Automation & Engineering',
       languages: 'Languages',
     },
+    dragHint: 'Drag to spin it',
     languageItems: [
       { name: 'Catalan', label: 'Native' },
       { name: 'Spanish', label: 'Native' },
@@ -337,6 +343,9 @@ const en: Translations = {
     viewCode: 'View Code',
     viewLive: 'Live Demo',
     offline: 'Not in production',
+    flipHint: 'Click to flip',
+    flipBack: 'Back',
+    visit: 'Visit project',
     offlineHint: 'This project is not currently deployed, so it cannot be visited.',
     items: [
       {
@@ -418,6 +427,7 @@ const en: Translations = {
       },
     ],
     certificationsTitle: 'Licenses and Certifications',
+    lineCaption: 'Certification palletizing line · a nod to my years programming robots at Tavil',
     certifications: [
       'Automation Studio Control / Motion & Visual Components – B&R Industrial Automation (2019)',
       'TIA PORTAL / WinCC – Siemens (2019)',

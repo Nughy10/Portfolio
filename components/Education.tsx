@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
+import ConveyorLine from '@/components/ConveyorLine';
 
 export default function Education() {
   const { t } = useLanguage();
@@ -80,6 +81,13 @@ export default function Education() {
             <h3 className="text-lg font-semibold mb-4 text-center" style={{ color: 'var(--text-primary)' }}>
               {t.education.certificationsTitle}
             </h3>
+            <ConveyorLine
+              // "TIA PORTAL / WinCC – Siemens (2019)" -> "SIEMENS"
+              labels={t.education.certifications.map((cert) =>
+                (cert.split(' – ').pop() ?? cert).replace(/\s*\(\d{4}\)$/, '').split(' ')[0].toUpperCase()
+              )}
+              caption={t.education.lineCaption}
+            />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {t.education.certifications.map((cert, i) => (
                 <motion.div
