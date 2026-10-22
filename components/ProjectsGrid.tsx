@@ -163,22 +163,25 @@ function ProjectCard({
             className={`${faceClass} [transform:rotateY(180deg)] p-5 flex flex-col`}
             style={faceStyle}
           >
-            <h3 className="text-base font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
+            <h3 className="text-base font-bold mb-3 text-center" style={{ color: 'var(--text-primary)' }}>
               {project.name}
             </h3>
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              {project.tech.map((tech) => (
-                <span
-                  key={tech}
-                  className="text-xs px-2 py-0.5 rounded-md terminal-text"
-                  style={{ background: 'var(--accent-subtle)', color: 'var(--accent)' }}
-                >
-                  {tech}
-                </span>
-              ))}
+            {/* The tech tags sit vertically centred in the space between title and actions */}
+            <div className="flex-1 flex items-center mb-4">
+              <div className="flex flex-wrap gap-1.5">
+                {project.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-xs px-2 py-0.5 rounded-md terminal-text"
+                    style={{ background: 'var(--accent-subtle)', color: 'var(--accent)' }}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-auto flex items-center justify-between gap-3">
+            <div className="flex items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={() => setFlipped(false)}

@@ -79,9 +79,9 @@ const es = {
     },
     dragHint: 'Arrastra para hacerla girar',
     languageItems: [
-      { name: 'Catalán', label: 'Nativo - C2' },
-      { name: 'Castellano', label: 'Nativo - C2' },
-      { name: 'Inglés', label: 'Avanzado - C1' },
+      { name: 'Catalán', label: 'Nativo-C2' },
+      { name: 'Castellano', label: 'Nativo-C2' },
+      { name: 'Inglés', label: 'Avanzado-C1' },
     ],
   },
   experience: {
@@ -336,9 +336,9 @@ const en: Translations = {
     },
     dragHint: 'Drag to spin it',
     languageItems: [
-      { name: 'Catalan', label: 'Native - C2' },
-      { name: 'Spanish', label: 'Native - C2' },
-      { name: 'English', label: 'Advanced - C1' },
+      { name: 'Catalan', label: 'Native-C2' },
+      { name: 'Spanish', label: 'Native-C2' },
+      { name: 'English', label: 'Advanced-C1' },
     ],
   },
   experience: {

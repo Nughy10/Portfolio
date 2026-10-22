@@ -9,12 +9,15 @@ export default function ExperienceTimeline() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -40px 0px' });
 
+  // The line fills up to the middle of the screen: empty while its top is below it,
+  // full once its bottom has passed it, so the tip follows what you're reading
+  const trackRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
+    target: trackRef,
+    offset: ['start center', 'end center'],
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 0.8], ['0%', '100%']);
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
     <section id="experience" className="section" ref={ref}>
@@ -28,6 +31,7 @@ export default function ExperienceTimeline() {
         <div className="relative max-w-3xl mx-auto">
           {/* Animated vertical line */}
           <div
+            ref={trackRef}
             className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2"
             style={{ background: 'var(--border)' }}
           >
