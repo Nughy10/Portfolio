@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import Script from 'next/script';
 import Navbar from '@/components/Navbar';
+import MotionProvider from '@/components/MotionProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,13 +20,17 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  // Lets the generated opengraph-image get an absolute URL
+  metadataBase: new URL('https://pau-nughy.dev'),
   title: 'Pau Isach Noguera — Full-Stack Developer',
   description:
-    'Analista Programador Full-Stack con 5+ años de experiencia en Angular, React, Vue.js, Java/Spring Boot y automatización. Portfolio profesional.',
+    'Desarrollador Full-Stack especializado en Frontend con 8+ años de experiencia en desarrollo web y automatización industrial. Angular, React, Next.js, Vue.js, Java/Spring Boot.',
   keywords: [
     'Full-Stack Developer',
+    'Frontend Developer',
     'Angular',
     'React',
+    'Next.js',
     'Vue.js',
     'Java',
     'Spring Boot',
@@ -37,10 +42,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Pau Isach Noguera — Full-Stack Developer',
     description:
-      'Analista Programador Full-Stack con 5+ años de experiencia. Angular, React, Vue.js, Java/Spring Boot.',
+      'Desarrollador Full-Stack especializado en Frontend con 8+ años de experiencia. Angular, React, Next.js, Vue.js, Java/Spring Boot.',
+    url: '/',
+    siteName: 'Pau Isach Noguera',
     type: 'website',
     locale: 'es_ES',
     alternateLocale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
   },
 };
 
@@ -62,8 +72,10 @@ export default function RootLayout({
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider>
           <LanguageProvider>
-            <Navbar />
-            <main>{children}</main>
+            <MotionProvider>
+              <Navbar />
+              <main>{children}</main>
+            </MotionProvider>
           </LanguageProvider>
         </ThemeProvider>
 

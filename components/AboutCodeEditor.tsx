@@ -7,16 +7,17 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export default function AboutCodeEditor() {
   const { locale, t } = useLanguage();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '0px 0px -40px 0px' });
 
   const codeLines = [
     { indent: 0, text: 'interface', keyword: true, rest: ' Developer {' },
     { indent: 1, text: 'name:', prop: true, value: ' "Pau Isach Noguera",' },
     { indent: 1, text: 'role:', prop: true, value: locale === 'es'
-      ? ' "Analista Programador Full-Stack",'
-      : ' "Full-Stack Analyst Developer",' },
+      ? ' "Desarrollador Full-Stack",'
+      : ' "Full-Stack Developer",' },
+    { indent: 1, text: 'specialization:', prop: true, value: ' "Frontend",' },
     { indent: 1, text: 'location:', prop: true, value: locale === 'es' ? ' "España",' : ' "Spain",' },
-    { indent: 1, text: 'experience:', prop: true, value: locale === 'es' ? ' "5+ años",' : ' "5+ years",' },
+    { indent: 1, text: 'experience:', prop: true, value: locale === 'es' ? ' "8+ años",' : ' "8+ years",' },
     { indent: 1, text: 'education:', prop: true, value: locale === 'es'
       ? ' "Ingeniería Electrónica y Telecomunicaciones",'
       : ' "Electronics & Telecom Engineering",' },
@@ -33,9 +34,9 @@ export default function AboutCodeEditor() {
   return (
     <section id="about" className="section" ref={ref}>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <h2 className="section-title">{t.about.title}</h2>
 

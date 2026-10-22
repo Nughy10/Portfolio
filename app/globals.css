@@ -286,6 +286,17 @@
   50% { opacity: 0; }
 }
 
+/* CSS side of the OS "reduce motion" setting (framer-motion is handled by MotionProvider) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .terminal-cursor {
+    animation: none;
+  }
+}
+
 /* ============================================
    EASTER EGG CONSOLE
    ============================================ */

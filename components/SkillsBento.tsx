@@ -211,7 +211,7 @@ function OrbitCard({
 export default function SkillsBento() {
   const { t } = useLanguage();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isInView = useInView(ref, { once: true, margin: '0px 0px -40px 0px' });
 
   const categories = Object.entries(skillsData) as [
     keyof typeof skillsData,
@@ -224,9 +224,9 @@ export default function SkillsBento() {
   return (
     <section id="skills" className="section" ref={ref}>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <h2 className="section-title">{t.skills.title}</h2>
 

@@ -1,6 +1,15 @@
 'use client';
 
+import { Fragment } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+
+// Same stack as the portfolio entry in the CV
+const stack = [
+  { name: 'Next.js', color: 'var(--accent)' },
+  { name: 'TypeScript', color: 'var(--cyan)' },
+  { name: 'Tailwind CSS', color: 'var(--green)' },
+  { name: 'Framer Motion', color: 'var(--rose)' },
+];
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -12,13 +21,14 @@ export default function Footer() {
     >
       <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
         {t.footer.builtWith}{' '}
-        <span className="terminal-text" style={{ color: 'var(--accent)' }}>
-          Next.js
-        </span>{' '}
-        {t.footer.and}{' '}
-        <span className="terminal-text" style={{ color: 'var(--cyan)' }}>
-          Framer Motion
-        </span>{' '}
+        {stack.map((tech, i) => (
+          <Fragment key={tech.name}>
+            {i > 0 && (i === stack.length - 1 ? ` ${t.footer.and} ` : ', ')}
+            <span className="terminal-text" style={{ color: tech.color }}>
+              {tech.name}
+            </span>
+          </Fragment>
+        ))}{' '}
         {t.footer.by}{' '}
         <span className="font-medium" style={{ color: 'var(--text-primary)' }}>
           Pau Isach Noguera
@@ -27,4 +37,3 @@ export default function Footer() {
     </footer>
   );
 }
-

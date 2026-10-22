@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { contactLinks, skillsData, type Translations } from '@/data/i18n';
 
 // A command's output: titled sections with "label → value" rows and/or paragraphs
@@ -12,12 +13,26 @@ interface OutputSection {
   paragraphs?: string[];
 }
 
+type Commands = ReturnType<typeof buildCommands>;
+
+// Outputs are stored as how to build them, not as text, so switching language
+// re-renders the whole history in the new language instead of clearing it
+type Render = (t: Translations, commands: Commands) => OutputSection[];
+
 type TerminalLine =
   | { type: 'input'; content: string }
-  | { type: 'output'; sections: OutputSection[] };
+  | { type: 'output'; render: Render };
 
-const COMPLETIONS = ['help', 'summary', 'skills', 'experience', 'projects', 'open ', 'education', 'contact', 'cv', 'clear'];
-const ALIASES: Record<string, string> = { about: 'summary', exp: 'experience' };
+const COMPLETIONS = ['help', 'whoami', 'summary', 'skills', 'experience', 'projects', 'open ', 'education', 'contact', 'cv', 'theme', 'lang', 'clear'];
+const ALIASES: Record<string, string> = { about: 'summary', exp: 'experience', language: 'lang' };
+
+// Longest prefix shared by every candidate, so Tab completes as far as it unambiguously can
+const commonPrefix = (values: string[]) =>
+  values.reduce((prefix, value) => {
+    let i = 0;
+    while (i < prefix.length && prefix[i] === value[i]) i++;
+    return prefix.slice(0, i);
+  });
 
 // "Código Hombre" / "https://codigohombre.es" -> "codigohombre" / "codigohombre.es"
 const normalize = (value: string) =>
@@ -31,7 +46,7 @@ const normalize = (value: string) =>
 // What the user types after "open": the project name without spaces, dots or accents
 const projectSlug = (name: string) => normalize(name).replace(/\./g, '');
 
-const text = (line: string): OutputSection[] => [{ paragraphs: [line] }];
+const text = (line: (t: Translations) => string): Render => (t) => [{ paragraphs: [line(t)] }];
 
 // Every output is built from the same data as the page sections so they never drift apart
 function buildCommands(t: Translations): Record<string, OutputSection[]> {
@@ -49,7 +64,14 @@ function buildCommands(t: Translations): Record<string, OutputSection[]> {
   });
 
   return {
-    help: [{ title: t.hero.helpTitle, rows: t.hero.help.map(([cmd, desc]): [string, string] => [cmd, desc]) }],
+    help: [
+      {
+        title: t.hero.helpTitle,
+        rows: t.hero.help.map(([cmd, desc]): [string, string] => [cmd, desc]),
+        paragraphs: [t.hero.helpTip],
+      },
+    ],
+    whoami: [{ title: t.hero.aboutTitle, paragraphs: [t.hero.role] }],
     summary: [{ title: t.hero.aboutTitle, paragraphs: t.hero.about }],
     skills: [{ title: t.hero.skillsHeader, rows: skills }],
     experience: [
@@ -88,7 +110,9 @@ function buildCommands(t: Translations): Record<string, OutputSection[]> {
 }
 
 export default function HeroTerminal() {
-  const { locale, t } = useLanguage();
+  const { locale, t, toggleLocale } = useLanguage();
+  const { toggleTheme } = useTheme();
+  const reduceMotion = useReducedMotion();
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<TerminalLine[]>([]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -99,6 +123,11 @@ export default function HeroTerminal() {
   const [prevLocale, setPrevLocale] = useState(locale);
 
   const commands = useMemo(() => buildCommands(t), [t]);
+  // What "open" accepts, for Tab completion
+  const openTargets = useMemo(
+    () => [...Object.keys(contactLinks), ...t.projects.items.map((p) => projectSlug(p.name))],
+    [t]
+  );
 
   // Focus the terminal on load, but not on touch devices (it would pop the keyboard up)
   useEffect(() => {
@@ -107,17 +136,16 @@ export default function HeroTerminal() {
     }
   }, []);
 
-  // Clear terminal history and restart the typewriter when language changes
-  if (prevLocale !== locale) {
-    setPrevLocale(locale);
-    setHistory([]);
-    setTypedChars(0);
-  }
-
   // Typewriter effect for greeting
   const fullText = `${t.hero.greeting} Pau Isach Noguera`;
-  const displayedText = fullText.slice(0, typedChars);
-  const isTyping = typedChars < fullText.length;
+  const displayedText = reduceMotion ? fullText : fullText.slice(0, typedChars);
+  const isTyping = displayedText.length < fullText.length;
+
+  // On a language change the greeting swaps in place once it has finished typing
+  if (prevLocale !== locale) {
+    setPrevLocale(locale);
+    if (!isTyping) setTypedChars(Number.MAX_SAFE_INTEGER);
+  }
   useEffect(() => {
     if (!isTyping) return;
     const timer = setTimeout(() => setTypedChars((n) => n + 1), 50);
@@ -132,21 +160,21 @@ export default function HeroTerminal() {
   }, [history]);
 
   const openProject = useCallback(
-    (query: string) => {
+    (query: string): Render => {
       const q = normalize(query);
-      if (!q) return t.hero.openUsage;
+      if (!q) return text((t) => t.hero.openUsage);
       if (q in contactLinks) {
         const link = contactLinks[q as keyof typeof contactLinks];
         window.open(link.url, '_blank', 'noopener,noreferrer');
-        return `${t.hero.opening} ${link.label}...`;
+        return text((t) => `${t.hero.opening} ${link.label}...`);
       }
       const project = t.projects.items.find(
         (p) => projectSlug(p.name).includes(q) || normalize(p.live).includes(q)
       );
-      if (!project) return t.hero.projectNotFound;
-      if (project.offline) return t.hero.projectOffline;
+      if (!project) return text((t) => t.hero.projectNotFound);
+      if (project.offline) return text((t) => t.hero.projectOffline);
       window.open(project.live, '_blank', 'noopener,noreferrer');
-      return `${t.hero.opening} ${project.live.replace(/^https?:\/\//, '')}...`;
+      return text((t) => `${t.hero.opening} ${project.live.replace(/^https?:\/\//, '')}...`);
     },
     [t]
   );
@@ -156,14 +184,13 @@ export default function HeroTerminal() {
     link.href = t.cv;
     link.download = t.cv.slice(1);
     link.click();
-    return t.hero.downloadingCV;
   }, [t]);
 
   const executeCommand = useCallback(
     (cmd: string) => {
       const raw = cmd.trim().toLowerCase();
       const trimmed = ALIASES[raw] ?? raw;
-      let output: OutputSection[];
+      let output: Render;
 
       if (trimmed === '') {
         return;
@@ -173,25 +200,58 @@ export default function HeroTerminal() {
         setHistoryIndex(-1);
         return;
       } else if (trimmed in commands) {
-        output = commands[trimmed];
+        output = (_, commands) => commands[trimmed];
       } else if (trimmed === 'open' || trimmed.startsWith('open ')) {
-        output = text(openProject(trimmed.slice(4)));
+        output = openProject(trimmed.slice(4));
       } else if (trimmed === 'cv') {
-        output = text(downloadCV());
+        downloadCV();
+        output = text((t) => t.hero.downloadingCV);
+      } else if (trimmed === 'lang') {
+        toggleLocale();
+        output = text((t) => t.hero.langSwitched);
+      } else if (trimmed === 'theme') {
+        // The theme wave starts from the middle of the terminal
+        const rect = terminalRef.current?.getBoundingClientRect();
+        toggleTheme(rect ? rect.left + rect.width / 2 : 0, rect ? rect.top + rect.height / 2 : 0);
+        output = text((t) => t.hero.themeSwitched);
+      } else if (trimmed === 'sudo hire pau') {
+        output = (t) => [{ paragraphs: t.hero.sudoHire }];
+        setTimeout(() => document.getElementById('contact')?.scrollIntoView(), 1200);
+      } else if (trimmed === 'sudo' || trimmed.startsWith('sudo ')) {
+        output = text((t) => t.hero.sudoDenied);
       } else {
-        output = text(t.hero.unknown);
+        output = text((t) => t.hero.unknown);
       }
 
       setHistory((prev) => [
         ...prev,
         { type: 'input', content: cmd },
-        { type: 'output', sections: output },
+        { type: 'output', render: output },
       ]);
       setCommandHistory((prev) => [cmd, ...prev]);
       setHistoryIndex(-1);
     },
-    [commands, openProject, downloadCV, t]
+    [commands, openProject, downloadCV, toggleLocale, toggleTheme]
   );
+
+  // Bash-like Tab: complete the unique match, or list the candidates when there are several
+  const completeInput = () => {
+    const value = input.toLowerCase();
+    if (!value) return;
+    const isOpen = value.startsWith('open ');
+    const prefix = isOpen ? 'open ' : '';
+    const partial = value.slice(prefix.length);
+    const matches = (isOpen ? openTargets : COMPLETIONS).filter((c) => c.startsWith(partial));
+    if (matches.length === 0) return;
+    setInput(prefix + commonPrefix(matches));
+    if (matches.length > 1) {
+      setHistory((prev) => [
+        ...prev,
+        { type: 'input', content: input },
+        { type: 'output', render: () => [{ paragraphs: [matches.map((m) => m.trim()).join('\u00a0\u00a0\u00a0')] }] },
+      ]);
+    }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -216,10 +276,7 @@ export default function HeroTerminal() {
       }
     } else if (e.key === 'Tab') {
       e.preventDefault();
-      const value = input.toLowerCase();
-      if (!value) return;
-      const match = COMPLETIONS.find((c) => c.startsWith(value));
-      if (match) setInput(match);
+      completeInput();
     }
   };
 
@@ -292,7 +349,7 @@ export default function HeroTerminal() {
           <div
             ref={terminalRef}
             onClick={() => inputRef.current?.focus()}
-            className="p-4 min-h-[280px] max-h-[400px] overflow-y-auto cursor-text terminal-text text-sm"
+            className="p-4 min-h-[280px] max-h-[400px] overflow-y-auto cursor-text terminal-text text-sm [scrollbar-color:rgba(255,255,255,0.15)_transparent]"
           >
             {/* Welcome message */}
             <div className="mb-4" style={{ color: 'var(--terminal-muted)' }}>
@@ -316,7 +373,7 @@ export default function HeroTerminal() {
                     className="ml-4 mb-3 space-y-3"
                     style={{ color: 'var(--terminal-green)' }}
                   >
-                    {line.sections.map((section, j) => (
+                    {line.render(t, commands).map((section, j) => (
                       <div key={j}>
                         {section.title && <p>{section.title}</p>}
                         {section.rows && (

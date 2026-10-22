@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import Image from 'next/image';
 import {
   motion,
   useInView,
@@ -89,7 +90,7 @@ function ProjectCard({
             onClick={() => setFlipped(true)}
             inert={flipped}
             aria-label={`${project.name} — ${t.flipHint}`}
-            className={`${faceClass} relative text-left flex flex-col`}
+            className={`${faceClass} group relative text-left flex flex-col`}
             style={faceStyle}
           >
             <span
@@ -101,11 +102,34 @@ function ProjectCard({
                 opacity: isLive ? 0.8 : 0.35,
               }}
             />
+            {/* Preview: a screenshot, or a placeholder when the project can't be visited */}
+            <span
+              className="relative block aspect-video w-full shrink-0 overflow-hidden border-b"
+              style={{ background: 'var(--bg-code)', borderColor: 'var(--border)' }}
+            >
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover object-top transition-transform duration-500 motion-safe:group-hover:scale-105"
+                />
+              ) : (
+                <span
+                  className="absolute inset-0 flex items-center justify-center text-3xl terminal-text"
+                  style={{
+                    color: 'var(--text-muted)',
+                    backgroundImage:
+                      'repeating-linear-gradient(135deg, transparent 0 12px, rgba(128, 128, 128, 0.06) 12px 24px)',
+                  }}
+                >
+                  {'</>'}
+                </span>
+              )}
+            </span>
             <span className="p-5 flex flex-col flex-1">
-              <span
-                className={`text-lg font-bold mb-3 ${isLive ? '' : 'pr-28'}`}
-                style={{ color: 'var(--text-primary)' }}
-              >
+              <span className="text-lg font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
                 {project.name}
               </span>
               <span className="text-sm leading-relaxed flex-1" style={{ color: 'var(--text-secondary)' }}>
@@ -194,14 +218,14 @@ function ProjectCard({
 export default function ProjectsGrid() {
   const { t } = useLanguage();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isInView = useInView(ref, { once: true, margin: '0px 0px -40px 0px' });
 
   return (
     <section id="projects" className="section" ref={ref}>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <h2 className="section-title">{t.projects.title}</h2>
 

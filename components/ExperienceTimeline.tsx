@@ -7,7 +7,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export default function ExperienceTimeline() {
   const { t } = useLanguage();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isInView = useInView(ref, { once: true, margin: '0px 0px -40px 0px' });
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -19,9 +19,9 @@ export default function ExperienceTimeline() {
   return (
     <section id="experience" className="section" ref={ref}>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <h2 className="section-title">{t.experience.title}</h2>
 

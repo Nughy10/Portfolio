@@ -39,14 +39,14 @@ const socialLinks = [
 export default function Contact() {
   const { t } = useLanguage();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isInView = useInView(ref, { once: true, margin: '0px 0px -40px 0px' });
 
   return (
     <section id="contact" className="section" ref={ref}>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
         className="max-w-2xl mx-auto text-center"
       >
         <h2 className="section-title">{t.contact.title}</h2>
