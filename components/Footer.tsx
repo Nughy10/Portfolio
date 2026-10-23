@@ -20,7 +20,7 @@ export default function Footer() {
       style={{ borderColor: 'var(--border)' }}
     >
       <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-        {t.footer.builtWith}{' '}
+        © 2026 · {t.footer.builtWith}{' '}
         {stack.map((tech, i) => (
           <Fragment key={tech.name}>
             {i > 0 && (i === stack.length - 1 ? ` ${t.footer.and} ` : ', ')}

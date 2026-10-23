@@ -6,6 +6,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import Script from 'next/script';
 import Navbar from '@/components/Navbar';
 import MotionProvider from '@/components/MotionProvider';
+import { contactLinks } from '@/data/i18n';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,10 +20,12 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
+const siteUrl = 'https://pau-nughy.dev';
+
 export const metadata: Metadata = {
   // Lets the generated opengraph-image get an absolute URL
-  metadataBase: new URL('https://pau-nughy.dev'),
-  title: 'Pau Isach Noguera — Full-Stack Developer',
+  metadataBase: new URL(siteUrl),
+  title: 'Pau Isach Noguera — Full-Stack Developer | Frontend Specialist',
   description:
     'Desarrollador Full-Stack especializado en Frontend con 8+ años de experiencia en desarrollo web y automatización industrial. Angular, React, Next.js, Vue.js, Java/Spring Boot.',
   keywords: [
@@ -39,8 +42,22 @@ export const metadata: Metadata = {
     'Portfolio',
   ],
   authors: [{ name: 'Pau Isach Noguera' }],
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   openGraph: {
-    title: 'Pau Isach Noguera — Full-Stack Developer',
+    title: 'Pau Isach Noguera — Full-Stack Developer | Frontend Specialist',
     description:
       'Desarrollador Full-Stack especializado en Frontend con 8+ años de experiencia. Angular, React, Next.js, Vue.js, Java/Spring Boot.',
     url: '/',
@@ -52,6 +69,35 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
   },
+};
+
+// schema.org Person so search engines can identify who the site is about
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Pau Isach Noguera',
+  url: siteUrl,
+  image: `${siteUrl}/opengraph-image`,
+  jobTitle: 'Full-Stack Developer | Frontend Specialist',
+  description:
+    'Desarrollador Full-Stack especializado en Frontend con 8+ años de experiencia en desarrollo web y automatización industrial.',
+  email: 'mailto:pau.nughy@gmail.com',
+  nationality: { '@type': 'Country', name: 'España' },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Universidad de Barcelona',
+  },
+  knowsAbout: [
+    'Angular',
+    'React',
+    'Next.js',
+    'Vue.js',
+    'TypeScript',
+    'Java',
+    'Spring Boot',
+    'Automatización industrial',
+  ],
+  sameAs: [contactLinks.linkedin.url, contactLinks.github.url],
 };
 
 export default function RootLayout({
@@ -66,6 +112,12 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem("theme");if(!t)t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, '\\u003c'),
           }}
         />
       </head>
